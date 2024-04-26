@@ -6,9 +6,11 @@ GREEN=\033[0;32m
 RESET=\033[0m
 SRC_FILES = main.cpp \
 			Bureaucrat.cpp \
+			Form.cpp \
 
 INCLUDE = Bureaucrat.hpp \
 			Colors.hpp \
+			Form.hpp \
 
 OBJECTS = $(SRC_FILES:.cpp=.o)
 CXX = c++

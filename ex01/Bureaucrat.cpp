@@ -1,4 +1,5 @@
 #include "Bureaucrat.hpp"
+#include "Form.hpp"
 
 Bureaucrat::Bureaucrat() : _name("Cindy")
 {
@@ -59,6 +60,21 @@ std::string Bureaucrat::getName() const
 int Bureaucrat::getGrade() const
 {
     return(this->_grade);
+}
+
+void Bureaucrat::signForm(Form& Form)
+{
+    if(this->_grade <= Form.getSignGradeRequired() && Form.getSignedStatus() == 0)
+    {
+        std::cout << this->_name << " signed " << Form.getName() << std::endl;
+        Form.beSigned(*this);
+    }
+    else if(this->_grade <= Form.getSignGradeRequired() && Form.getSignedStatus() == 1)
+        std::cout << this->_name << " couldn't sign " << Form.getName() << " because it was already signed" << std::endl;
+    else
+    {
+        std::cout << this->_name << " couldn't sign " << Form.getName() << " because their grade was too low" << std::endl;
+    }
 }
 
 void Bureaucrat::IncrementGrade(int rank)
