@@ -1,4 +1,4 @@
-NAME = Bureaucrat
+NAME = Form
 VERMILION_RED=\033[1;31m
 AZURE_BLUE=\033[1;34m
 GOLD_COLOR=\033[38;5;220m
@@ -22,9 +22,9 @@ CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 all: $(NAME)  
 
 $(NAME) : $(OBJECTS) $(INCLUDE) Makefile
-	@echo "$(GOLD_COLOR)Compiling Bureaucrat...$(RESET)"
+	@echo "$(GOLD_COLOR)Compiling Form...$(RESET)"
 	$(CXX) $(CXXFLAGS) -o $(NAME)  $(OBJECTS) 
-	@echo "$(GOLD_COLOR)Bureaucrat compiled ! :)$(RESET)"
+	@echo "$(GOLD_COLOR)Form compiled ! :)$(RESET)"
 
 clean:
 	@echo "$(AZURE_BLUE)Cleaning in progress...$(RESET)"

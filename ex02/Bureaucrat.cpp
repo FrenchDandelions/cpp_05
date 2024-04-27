@@ -1,4 +1,5 @@
 #include "Bureaucrat.hpp"
+#include "AForm.hpp"
 
 Bureaucrat::Bureaucrat() : _name("Cindy")
 {
@@ -59,6 +60,40 @@ std::string Bureaucrat::getName() const
 int Bureaucrat::getGrade() const
 {
     return(this->_grade);
+}
+
+void Bureaucrat::signForm(AForm& Form)
+{
+    if(this->_grade <= Form.getSignGradeRequired() && Form.getSignedStatus() == 0)
+    {
+        Form.beSigned(*this);
+        std::cout << this->_name << " signed " << Form.getName() << std::endl;
+    }
+    else if(this->_grade <= Form.getSignGradeRequired() && Form.getSignedStatus() == 1)
+    {
+        std::cout << this->_name << " couldn't sign " << Form.getName() << " because it was already signed" << std::endl;
+    }
+    else
+    {
+        std::cout << this->_name << " couldn't sign " << Form.getName() << " because their grade was too low" << std::endl;
+    }
+}
+
+void Bureaucrat::executeForm(AForm const & form)
+{
+    if(this->_grade <= form.getExecuteGradeRequired() && form.getSignedStatus() == 1)
+    {
+        form.execute(*this);
+        std::cout << this->_name << " executed " << form.getName() << std::endl;
+    }
+    else if(this->_grade <= form.getExecuteGradeRequired() && form.getSignedStatus() == 0)
+    {
+        std::cout << this->_name << " couldn't execute " << form.getName() << " because the form wasn't signed" << std::endl;
+    }
+    else
+    {
+        std::cout << this->_name << " couldn't execute " << form.getName() << " because their grade was too low" << std::endl;
+    }
 }
 
 void Bureaucrat::IncrementGrade(int rank)

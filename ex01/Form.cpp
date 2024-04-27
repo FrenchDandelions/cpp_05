@@ -8,6 +8,7 @@ Form::Form() : _name("Form"), _is_signed(0), _sign_grade(90), _execute_grade(45)
 
 Form::Form(std::string name, int sign_grade, int execute_grade) : _name(name), _is_signed(0), _sign_grade(sign_grade), _execute_grade(execute_grade)
 {
+    std::cout << "Form constructor called" << std::endl;
     if(this->getSignGradeRequired() < 1)
         throw Form::GradeTooHighException();
     if(this->getSignGradeRequired() > 150)
@@ -16,7 +17,8 @@ Form::Form(std::string name, int sign_grade, int execute_grade) : _name(name), _
         throw Form::GradeTooHighException();
     if(this->getExecuteGradeRequired() > 150 )
         throw Form::GradeTooLowException();
-    std::cout << "Form constructor called" << std::endl;
+    if(this->_sign_grade < this->_execute_grade)
+        throw Form::GradeTooLowException();
 }
 
 Form::Form(const Form &copy) : _name(copy._name), _is_signed(0), _sign_grade(copy._sign_grade), _execute_grade(copy._execute_grade)
@@ -65,7 +67,7 @@ int Form::getExecuteGradeRequired(void) const
 void Form::beSigned(const Bureaucrat& Bureaucrat)
 {
     if(this->_sign_grade < Bureaucrat.getGrade())
-        throw Form::GradeTooLowException();
+        throw Form::GradeTooLowToSignException();
     if(this->_is_signed)
         std::cout << this->_name << " is already signed" << std::endl;
     else
@@ -83,6 +85,11 @@ const char* Form::GradeTooHighException::what() const throw()
 const char* Form::GradeTooLowException::what() const throw()
 {
     return("The form grade assigned is too low");
+}
+
+const char* Form::GradeTooLowToSignException::what() const throw()
+{
+    return("The bureaucrat's grade is too low to sign");
 }
 
 std::ostream& operator<<(std::ostream& out, const Form& Form)
