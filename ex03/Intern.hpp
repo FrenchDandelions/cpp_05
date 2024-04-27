@@ -18,11 +18,6 @@ class Intern
         ~Intern();
 
         AForm* makeForm(std::string request, std::string target);
-
-        class UnknownForm : public virtual std::exception
-        {
-            public:
-        };
 };
 
 #endif
