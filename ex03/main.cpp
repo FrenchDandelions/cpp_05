@@ -7,7 +7,7 @@
 #include "Intern.hpp"
 
 template <typename T> 
-void myDelete(T* &ptr)
+void del(T* &ptr)
 {
     delete ptr;
     ptr = NULL;
@@ -65,17 +65,16 @@ int main()
         std::cerr << e.what() << std::endl;
         std::cout << std::endl << GREEN "DESTRUCTORS:" << std::endl;
 	    std::cout << "---------------------------------------------------" RESET << std::endl;
-        myDelete(rrf);
-        myDelete(rrf1);
-        myDelete(rrf2);
-        myDelete(rrf3);
+        del(rrf);
+        del(rrf1);
+        del(rrf2);
+        del(rrf3);
         return(1);
     }
     std::cout << std::endl << GREEN "DESTRUCTORS:" << std::endl;
 	std::cout << "---------------------------------------------------" RESET << std::endl;
-    myDelete(rrf);
-    myDelete(rrf1);
-    myDelete(rrf2);
-    myDelete(rrf3);
-    
+    del(rrf);
+    del(rrf1);
+    del(rrf2);
+    del(rrf3);
 }
